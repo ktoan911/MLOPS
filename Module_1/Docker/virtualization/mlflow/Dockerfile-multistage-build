@@ -1,3 +1,4 @@
+#bản python đầy đủ pip các thứ để chạy tải môi trường ảo
 FROM python:3.9-slim AS compile-image
 
 ARG MLFLOW_VERSION
@@ -10,6 +11,7 @@ ENV PATH="$VIRTUAL_ENV/bin:$PATH"
 # RUN /opt/venv/bin/pip install mlflow==${MLFLOW_VERSION} psycopg2-binary charset-normalizer==2.1.0
 RUN pip install mlflow==${MLFLOW_VERSION} psycopg2-binary charset-normalizer==2.1.0
 
+#chuyển môi trường ảo cho bản python mới nhẹ hơn (chỉ khoảng 5mb) và chuyển python mới làm base
 FROM python:3.9-alpine AS runtime-image
 
 LABEL maintainer="quandv"
