@@ -1,0 +1,1 @@
+* * * * * cd /media/toan/DATA1/Python/MLOps/Module_1/Bash_Scripting/bash_scripting/scripts/cronjob && /bin/bash run.sh >> logs/iris.log 2>&1
