@@ -1,0 +1,20 @@
+#File này giống như "metadata" để Helm biết đây là cái gì.
+
+apiVersion: v2  # Dùng định dạng Helm chart version 2
+name: ocr   # Tên chart (gói ứng dụng)
+description: My Helm Chart for OCR
+
+# A chart can be `application` or `library`,
+# we don't use `library` so often
+type: application  # Loại chart (application / library)
+
+# The chart vesion, which should be changed every time
+# you make an update to the chart
+version: 0.1.0
+
+# The version number of the application being deployed
+appVersion: "1.0.0" # Version của app thật sự bạn cài (ví dụ image version)
+
+maintainers:
+- email: fullstackdatascience.com
+  name: fullstackdatascience

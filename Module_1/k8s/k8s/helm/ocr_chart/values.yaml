@@ -1,0 +1,16 @@
+replicaCount: 2        # Số lượng Pod
+
+image: 
+  repository: quandvrobusto/house-price-prediction-api  # Docker image để chạy
+  tag: "0.0.1"   # Tag (version) của image
+  pullPolicy: Always
+
+# service:
+#   type: ClusterIP                # Kiểu Service (NodePort, LoadBalancer,...)
+#   port: 80                       # Port mà Service expose ra
+
+# resources: {}                    # Tài nguyên CPU/memory cho Pod (chưa khai báo)
+
+# nodeSelector: {}                # Gán Pod chạy ở node cụ thể (nếu cần)
+# tolerations: []                 # Toleration với node có taints
+# affinity: {}                    # Quy tắc affinity/anti-affinity (đặt Pod gần/xa nhau)

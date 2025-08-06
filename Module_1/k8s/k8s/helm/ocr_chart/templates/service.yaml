@@ -1,0 +1,22 @@
+# Nối service và pod qua label app: {{ .Release.Name }}.
+# Service là một đối tượng trong Kubernetes giúp bạn giao tiếp với các Pod.
+
+# Vì Pod có IP thay đổi liên tục, Service dùng để:
+# Gán một địa chỉ ổn định
+# Chia tải đến nhiều Pod (load balancing)
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ .Release.Name }}
+  labels:
+    app: {{ .Release.Name }}
+  namespace: example
+spec:
+  selector:
+    app: {{ .Release.Name }}
+  ports:
+    - port: 30000
+      protocol: TCP
+      targetPort: 30000
+  type: ClusterIP
