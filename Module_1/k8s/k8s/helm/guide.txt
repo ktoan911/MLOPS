@@ -1,0 +1,75 @@
+elm là gì? (Dễ hiểu)
+Khi bạn triển khai một ứng dụng lên Kubernetes, bạn phải viết nhiều file YAML, ví dụ:
+Deployment
+Service
+ConfigMap
+Ingress
+PersistentVolumeClaim
+
+Viết và quản lý từng file YAML như vậy rất mệt và dễ sai.
+
+➡️ Helm là công cụ giúp bạn gói các file YAML đó thành 1 gói duy nhất gọi là “Chart” → dễ cài, dễ sửa, dễ xoá.
+🛠 Ví dụ thực tế
+Bình thường (không dùng Helm):
+Bạn cần chạy một app NGINX:
+
+✅ Bạn phải viết:
+
+deployment.yaml
+
+service.yaml
+
+config.yaml
+
+Rồi chạy:
+
+
+
+
+kubectl apply -f deployment.yaml
+kubectl apply -f service.yaml
+...
+Dùng Helm:
+Chỉ cần:
+
+helm install ten-ung-dung ten-chart
+Helm sẽ tự tạo và apply các YAML cho bạn.
+
+📦 Helm Chart là gì?
+Chart giống như “bộ cài đặt” cho một ứng dụng.
+
+Mỗi chart gồm:
+
+Các file YAML mẫu (templates/)
+
+File cấu hình (values.yaml) – bạn thay đổi nếu muốn
+
+🧪 Cách dùng cơ bản (chỉ 5 lệnh cần nhớ)
+1. Cài Helm (1 lần)
+curl https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3 | 
+
+2. Thêm nơi lấy ứng dụng (gọi là repo)
+helm repo add bitnami https://charts.bitnami.com/bitnami
+helm repo update
+
+3. Cài ứng dụng (ví dụ: NGINX)
+helm install nginx-demo bitnami/nginx
+✅ Chạy xong, bạn đã có nginx trên Kubernetes!
+
+4. Xem app đang chạy
+helm list
+
+5. Xoá app
+helm uninstall nginx-demo
+
+CẤU TRÚC HELM:
+
+├── charts/                 # Subcharts (nếu có)
+├── Chart.yaml              # Metadata: tên chart, version
+├── values.yaml             # Giá trị mặc định cho cấu hình
+├── templates/              # Chứa các YAML mẫu sẽ được "render"
+│   ├── deployment.yaml
+│   ├── service.yaml
+│   ├── _helpers.tpl        # Các hàm template
+│   └── ...
+└── .helmignore             # Giống .gitignore

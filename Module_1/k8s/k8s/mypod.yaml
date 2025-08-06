@@ -1,0 +1,130 @@
+#kubectl get po mypod -o yaml > mypod.yaml
+
+
+apiVersion: v1
+kind: Pod
+metadata:
+  annotations:
+    kubectl.kubernetes.io/last-applied-configuration: |
+      {"apiVersion":"v1","kind":"Pod","metadata":{"annotations":{},"name":"mypod","namespace":"ie"},"spec":{"containers":[{"image":"nginx","name":"mypod","resources":{"limits":{"cpu":1,"memory":"1Gi"},"requests":{"cpu":1,"memory":"1Gi"}}}]}}
+  creationTimestamp: "2025-08-05T16:06:19Z"
+  generation: 1
+  name: mypod
+  namespace: ie
+  resourceVersion: "900"
+  uid: adbc0c63-d75d-4ee4-a680-747f1cbde93c
+spec:
+  containers:
+  - image: nginx
+    imagePullPolicy: Always
+    name: mypod
+    resources:
+      limits:
+        cpu: "1"
+        memory: 1Gi
+      requests:
+        cpu: "1"
+        memory: 1Gi
+    terminationMessagePath: /dev/termination-log
+    terminationMessagePolicy: File
+    volumeMounts:
+    - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+      name: kube-api-access-2ltq6
+      readOnly: true
+  dnsPolicy: ClusterFirst
+  enableServiceLinks: true
+  nodeName: minikube
+  preemptionPolicy: PreemptLowerPriority
+  priority: 0
+  restartPolicy: Always
+  schedulerName: default-scheduler
+  securityContext: {}
+  serviceAccount: default
+  serviceAccountName: default
+  terminationGracePeriodSeconds: 30
+  tolerations:
+  - effect: NoExecute
+    key: node.kubernetes.io/not-ready
+    operator: Exists
+    tolerationSeconds: 300
+  - effect: NoExecute
+    key: node.kubernetes.io/unreachable
+    operator: Exists
+    tolerationSeconds: 300
+  volumes:
+  - name: kube-api-access-2ltq6
+    projected:
+      defaultMode: 420
+      sources:
+      - serviceAccountToken:
+          expirationSeconds: 3607
+          path: token
+      - configMap:
+          items:
+          - key: ca.crt
+            path: ca.crt
+          name: kube-root-ca.crt
+      - downwardAPI:
+          items:
+          - fieldRef:
+              apiVersion: v1
+              fieldPath: metadata.namespace
+            path: namespace
+status:
+  conditions:
+  - lastProbeTime: null
+    lastTransitionTime: "2025-08-05T16:06:31Z"
+    status: "True"
+    type: PodReadyToStartContainers
+  - lastProbeTime: null
+    lastTransitionTime: "2025-08-05T16:06:19Z"
+    status: "True"
+    type: Initialized
+  - lastProbeTime: null
+    lastTransitionTime: "2025-08-05T16:06:31Z"
+    status: "True"
+    type: Ready
+  - lastProbeTime: null
+    lastTransitionTime: "2025-08-05T16:06:31Z"
+    status: "True"
+    type: ContainersReady
+  - lastProbeTime: null
+    lastTransitionTime: "2025-08-05T16:06:19Z"
+    status: "True"
+    type: PodScheduled
+  containerStatuses:
+  - allocatedResources:
+      cpu: "1"
+      memory: 1Gi
+    containerID: docker://5a7a0097858275438dc73aed070b8b6ee4e02dc308a95faf85af044cc24334bb
+    image: nginx:latest
+    imageID: docker-pullable://nginx@sha256:84ec966e61a8c7846f509da7eb081c55c1d56817448728924a87ab32f12a72fb
+    lastState: {}
+    name: mypod
+    ready: true
+    resources:
+      limits:
+        cpu: "1"
+        memory: 1Gi
+      requests:
+        cpu: "1"
+        memory: 1Gi
+    restartCount: 0
+    started: true
+    state:
+      running:
+        startedAt: "2025-08-05T16:06:30Z"
+    volumeMounts:
+    - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+      name: kube-api-access-2ltq6
+      readOnly: true
+      recursiveReadOnly: Disabled
+  hostIP: 192.168.49.2
+  hostIPs:
+  - ip: 192.168.49.2
+  phase: Running
+  podIP: 10.244.0.3
+  podIPs:
+  - ip: 10.244.0.3
+  qosClass: Guaranteed
+  startTime: "2025-08-05T16:06:19Z"

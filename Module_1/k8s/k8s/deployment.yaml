@@ -1,0 +1,27 @@
+#Deployment là một đối tượng trong Kubernetes dùng để quản lý vòng đời của Pod một cách tự động, an toàn, và dễ dàng mở rộng.
+apiVersion: apps/v1 # 	Sử dụng API của Kubernetes để tạo Deployment
+kind: Deployment # 	Tài nguyên bạn đang khai báo là Deployment
+metadata:
+  name: mydeployment
+  namespace: example
+spec:
+# Deployment → ReplicaSet → Pod
+  replicas: 2 # duy trì 2 pod giống nhau , kể cả 1 pod bị xóa cũng sẽ tự động tạo pod mới ở chế độ unready 
+  selector:
+    matchLabels: #	Deployment sẽ quản lý tất cả các Pod có label app: mypod
+      app: mypod # the deployment manage all pods with labels matching mypod
+  template:
+    metadata:
+      labels: #	Các Pod được tạo sẽ gắn label app: mypod
+        app: mypod # labels for all the pods the deployment is managing
+    spec:
+      containers:
+        - name: mypod
+          image: nginx
+          resources:
+            limits:
+              memory: 600Mi
+              cpu: 1
+            requests:
+              memory: 300Mi
+              cpu: 500m
